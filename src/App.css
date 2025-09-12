@@ -59,3 +59,35 @@ input:focus {
   outline: none;
   border-color: #007bff;
 }
+
+body {
+  margin : 0;
+}
+
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #000000;
+  color: white;
+
+  height: 6vh;
+}
+
+.nav-item {
+  margin: 0 10px;
+  height: 80%;
+  width: 5vw;
+  background-color:#007bff;
+  border-radius: 5px;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+Link {
+}

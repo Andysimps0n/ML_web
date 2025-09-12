@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'  
+import Nav from './Nav'
 import Model from './Model'
 
 
@@ -7,9 +9,15 @@ function App() {
 
 
 return (
-    <>
-      <Model></Model>
-    </>
+  <Router>
+    <Nav></Nav>
+    <Routes>
+      <Route path='/' element={<Model></Model>}></Route>
+      <Route path='/rock-paper-scissor' element={<div></div>}></Route>
+    </Routes>
+
+  </Router>
+
   )
 }
 
