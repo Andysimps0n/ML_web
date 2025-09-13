@@ -14,7 +14,7 @@ function UseLinearModel() {
     
     useEffect(()=>{
         if(data == null) return;
-        console.log(data)
+        // console.log(data)
     },[data])
     
     useEffect(()=>{
@@ -31,7 +31,7 @@ function UseLinearModel() {
             const xsArr = data.map(d => Number(d.BestSquatKg) / 100);
             const ysArr = data.map(d => Number(d.BestDeadliftKg) / 100);
 
-            console.log(xsArr, ysArr);
+            // console.log(xsArr, ysArr);
             
             // tensors for training
             const xs = tf.tensor2d(xsArr, [xsArr.length, 1]);
@@ -39,7 +39,7 @@ function UseLinearModel() {
             const history = await model.fit(xs, ys, {epochs: 100});
             
             console.log("Model trained");
-            console.log(xs, ys);
+            // console.log(xs, ys);
             
             // History data for loss chart
             const formatted_history = history.history.loss.map((loss, i)=> ({
@@ -47,7 +47,7 @@ function UseLinearModel() {
             loss,
             }))
             setHistoryData(formatted_history)
-            console.log(formatted_history)
+            // console.log(formatted_history)
     
             // Training data for scatter chart
             const formatted_train = xsArr.map((x, i)=> ({
@@ -80,7 +80,7 @@ function UseLinearModel() {
 
 
 
-    return { historyData, result, updateLine, trainData, setHistoryData, setTrainData, predLine, setPredLine, lineData, setLineData, inputPredict, setInputPredict, testingData, setTestingData, modelState, setModelState};}
+    return { historyData, result,updateLine, trainData, setHistoryData, setTrainData, predLine, setPredLine, lineData, setLineData, inputPredict, setInputPredict, testingData, setTestingData, modelState, setModelState};}
     
 export { UseLinearModel };
 

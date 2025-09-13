@@ -3,8 +3,16 @@ import { ScatterChart, Scatter,LineChart, Line, XAxis, YAxis, CartesianGrid, Too
 import { UseLinearModel } from './functions/functions';
 
 function Model() {
-  const { historyData, trainData, inputPredict, setInputPredict, result, predLine, testingData, updateLine} = UseLinearModel();
-  
+  const { historyData, trainData, inputPredict, setInputPredict, setTrainData, result, predLine, testingData, updateLine} = UseLinearModel();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if(historyData.length > 0) {
+      setIsLoaded(true);
+    }
+  }, [historyData]);
+
+
   useEffect(()=>{
     if(testingData.length > 0){
 
@@ -14,8 +22,8 @@ function Model() {
 
     return (
       <>
+        {isLoaded ?
         <div className="plot-wrapper">
-          
             <div className="p-4 flex-1">
               <h2 className="text-lg font-bold mb-2">Training Loss</h2>
               <LineChart width={500} height={300} data={historyData}>
@@ -42,7 +50,8 @@ function Model() {
               </ScatterChart>
             </div>
         </div>
-
+        : <div className='loading'>Loading Model...</div>}
+        {isLoaded ?
         <div className="card-container">
           <div className="card-wrapper">
             <div className="text-container">How much do you squat? <br></br>(use standard unit -  Kg)</div>
@@ -53,7 +62,7 @@ function Model() {
             />
             <button onClick={()=>{updateLine(inputPredict);setInputPredict('');}}>Predict</button>
           </div>
-        </div>
+        </div> : <div></div>}
       </>
     );
 
