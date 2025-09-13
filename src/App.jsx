@@ -13,7 +13,7 @@ return (
     <Nav></Nav>
     <Routes>
       <Route path='/' element={<Model></Model>}></Route>
-      <Route path='/human-learning' element={<div></div>}></Route>
+      {/* <Route path='/human-learning' element={<div></div>}></Route> */}
     </Routes>
 
   </Router>

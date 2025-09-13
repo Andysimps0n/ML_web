@@ -3,9 +3,14 @@ import { ScatterChart, Scatter,LineChart, Line, XAxis, YAxis, CartesianGrid, Too
 import { UseLinearModel } from './functions/functions';
 
 function Model() {
-  const { historyData, setHistoryData, trainData, setTrainData, predLine, setPredLine, lineData, setLineData, inputPredict, setInputPredict, testingData, setTestingData, modelState, setModelState, updateLine} = UseLinearModel();
+  const { historyData, trainData, inputPredict, setInputPredict, result, predLine, testingData, updateLine} = UseLinearModel();
   
+  useEffect(()=>{
+    if(testingData.length > 0){
 
+      window.alert(" You would deadlift" + result.toFixed(1) + " Kg" );
+    }
+  },[testingData])
 
     return (
       <>
@@ -31,21 +36,23 @@ function Model() {
                 <YAxis type="number" dataKey="y" />
                 <Tooltip />
                 <Legend />
-                <Scatter r={6} name="Training Data" data={trainData} fill="#554cffff" />
-                <Scatter r={6} name="Prediction" data={testingData} fill="#3cb36aff" />
+                <Scatter r={0.1} name="Training Data" data={trainData} fill="#01b661ff" />
+                <Scatter r={10} name="Prediction" data={testingData} fill="#ff0000ff" />
                 {/* <Line type="monotone" data={predLine} dataKey="y" stroke="#0000ff" dot={false} name="Model Prediction" /> */}
               </ScatterChart>
             </div>
         </div>
 
         <div className="card-container">
-          <input 
-          value={inputPredict}          // <-- controlled
-          onKeyDown={(e) => {if (e.key === "Enter") {updateLine(inputPredict); setInputPredict('');  }}} 
-          onChange={(e)=>{setInputPredict(e.target.value)}} type="text" 
-          />
-          <button onClick={()=>{updateLine(inputPredict);setInputPredict('');}}>Predict</button>
-
+          <div className="card-wrapper">
+            <div className="text-container">How much do you squat? <br></br>(use standard unit -  Kg)</div>
+            <input 
+            value={inputPredict}          // <-- controlled
+            onKeyDown={(e) => {if (e.key === "Enter") {updateLine(inputPredict); setInputPredict('');  }}} 
+            onChange={(e)=>{setInputPredict(e.target.value)}} type="text" 
+            />
+            <button onClick={()=>{updateLine(inputPredict);setInputPredict('');}}>Predict</button>
+          </div>
         </div>
       </>
     );

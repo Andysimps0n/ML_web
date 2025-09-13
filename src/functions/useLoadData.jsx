@@ -6,7 +6,7 @@ function useLoadData() {
   const [data, setData] = useState(null);
   useEffect(()=>{
 
-      Papa.parse("/subset2.csv", {
+      Papa.parse("/subset5.csv", {
         download: true,
         header: true,
         complete: function(results) {
