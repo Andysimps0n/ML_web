@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLoadData } from './useLoadData';
 
-function UseLinearModel() {
+function UseLinearModel(lossfunction) {
     const [historyData, setHistoryData] = useState([]);
     const [testingData, setTestingData] = useState([]);
     const [trainData, setTrainData] = useState([])
@@ -21,10 +21,10 @@ function UseLinearModel() {
         if(data == null) return;
 
         data.pop()
-        async function loadTf(){
+        async function loadTf(lossfunction="meanSquaredError"){
             const model = tf.sequential();
             model.add(tf.layers.dense({units: 1, inputShape: [1]}));
-            model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+            model.compile({loss: lossfunction, optimizer: 'sgd'});
             setModelState(model)
             
             // raw arrays
@@ -36,7 +36,7 @@ function UseLinearModel() {
             // tensors for training
             const xs = tf.tensor2d(xsArr, [xsArr.length, 1]);
             const ys = tf.tensor2d(ysArr, [ysArr.length, 1]);
-            const history = await model.fit(xs, ys, {epochs: 100});
+            const history = await model.fit(xs, ys, {epochs: 50});
             
             console.log("Model trained");
             // console.log(xs, ys);
@@ -61,7 +61,7 @@ function UseLinearModel() {
 
 
         }
-        loadTf();
+        loadTf(lossfunction);
     },[data])
 
 

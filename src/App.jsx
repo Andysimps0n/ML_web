@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'  
-import Nav from './Nav'
-import Model from './Model'
+import Nav from './components/Nav'
+import Model from './components/Model'
 
 
 function App() {
