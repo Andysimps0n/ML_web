@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLoadData } from './useLoadData';
 
-function UseLinearModel(lossfunction) {
+function UseLinearModel(dataSize=200, epoch=50) {
     const [historyData, setHistoryData] = useState([]);
     const [testingData, setTestingData] = useState([]);
     const [trainData, setTrainData] = useState([])
@@ -10,8 +10,11 @@ function UseLinearModel(lossfunction) {
     const [inputPredict, setInputPredict] = useState('');
     const [modelState, setModelState] = useState(null);
     const [result, setResult] = useState(null);
-    const data = useLoadData();
     
+    const data = useLoadData(dataSize);
+    const epoch_ = epoch
+
+
     useEffect(()=>{
         if(data == null) return;
         // console.log(data)
@@ -21,10 +24,10 @@ function UseLinearModel(lossfunction) {
         if(data == null) return;
 
         data.pop()
-        async function loadTf(lossfunction="meanSquaredError"){
+        async function loadTf(epoch){
             const model = tf.sequential();
             model.add(tf.layers.dense({units: 1, inputShape: [1]}));
-            model.compile({loss: lossfunction, optimizer: 'sgd'});
+            model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
             setModelState(model)
             
             // raw arrays
@@ -36,7 +39,7 @@ function UseLinearModel(lossfunction) {
             // tensors for training
             const xs = tf.tensor2d(xsArr, [xsArr.length, 1]);
             const ys = tf.tensor2d(ysArr, [ysArr.length, 1]);
-            const history = await model.fit(xs, ys, {epochs: 50});
+            const history = await model.fit(xs, ys, {epochs: epoch});
             
             console.log("Model trained");
             // console.log(xs, ys);
@@ -61,8 +64,8 @@ function UseLinearModel(lossfunction) {
 
 
         }
-        loadTf(lossfunction);
-    },[data])
+        loadTf(epoch_);
+    },[data, epoch_, dataSize])
 
 
 

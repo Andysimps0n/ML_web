@@ -4,17 +4,17 @@ import Charts from './Charts';
 import HyperparameterCard from './HyperparameterCard';
 
 function Model() {
+  const [dataSize, setDataSize] = useState(200);
+  const [epoch, setEpoch] = useState(50);
+
   const { 
     historyData, 
     trainData, 
     inputPredict, 
     setInputPredict, 
-    setTrainData, 
-    result, 
-    predLine, 
     testingData, 
     updateLine
-  } = UseLinearModel();
+  } = UseLinearModel(dataSize, epoch);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -38,6 +38,8 @@ function Model() {
       />
 
       <HyperparameterCard 
+        setEpoch={setEpoch}
+        setDataSize={setDataSize}
         isLoaded={isLoaded}
         updateLine={updateLine}
         setInputPredict={setInputPredict}

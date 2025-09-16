@@ -4,8 +4,8 @@ import { ScatterChart, Scatter,LineChart, Line, XAxis, YAxis, CartesianGrid, Too
 function Charts({ historyData, isLoaded, trainData, testingData }) {
 
   useEffect(()=>{
-    console.log("charts loaded")
-  })
+    console.log("Train Data Updated")
+  },[trainData])
 
   return (
     <div className={`plot-wrapper ${isLoaded ? "" : "hide-block"}`}>
