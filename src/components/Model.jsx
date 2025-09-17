@@ -24,6 +24,9 @@ function Model() {
     }
   }, [historyData]);
 
+  useEffect(()=>{
+    console.log(`trainData updated:`, trainData )
+  },[trainData])
   return (
     <>
       <div className={`loading ${isLoaded ? "hide-block" : ""}`}>
