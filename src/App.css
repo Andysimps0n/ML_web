@@ -1,3 +1,7 @@
+body {
+  user-select: none;
+}
+
 .card-container {
   display: flex;
   justify-content: space-between;
@@ -63,7 +67,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  width: 70vw;
+  width: 80vw;
   height: 35vh;
 }
 
@@ -159,7 +163,7 @@ body {
 }
 
 .hyperparameter-wrapper {
-  flex: 1 1 45%;  /* grows/shrinks to fill space */
+  flex: 0 0 45%;  /* grows/shrinks to fill space */
   height: 20vh;
   
   display: flex;

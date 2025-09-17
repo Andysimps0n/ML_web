@@ -7,11 +7,15 @@ function HyperparameterCard({
   setDataSize, 
   inputPredict,
   setEpoch,
+  setLossFunction,
+  lossMap,
 
 }) {
   
+  const lossFunctionOptions = ['meanSquaredError', 'absoluteDifference'];
   const dataSizeOptions = [100, 200, 500, 1000, 3000];
   const epochOptions = [10, 50, 100];
+
 
   return (
     <div className={`input-card ${isLoaded ? "" : "hide-block"}` }>
@@ -22,12 +26,14 @@ function HyperparameterCard({
           <div className="parameter-name">Loss Functions</div>
           <div className="button-container">
             <div className={`buttons-wrapper`}>
-              <div className="parameter-options">Mean Squared Error</div>
-              <div className="parameter-options">Absolute Difference</div>
+              <div onClick={()=>{setLossFunction(lossMap.mse)}} className="parameter-options">Mean Squared Error</div>
+              <div onClick={()=>{setLossFunction(lossMap.mae)}} className="parameter-options">Mean Absolute Error</div>
             </div>
           </div>
         </div> 
-        <div className="hyperparameter-wrapper">
+
+
+        {/* <div className="hyperparameter-wrapper">
           <div className="parameter-name">Optimizer Funcitons</div>
           <div className="button-container">
             <div className={`buttons-wrapper`}>
@@ -36,7 +42,9 @@ function HyperparameterCard({
               <div className="parameter-options">Stochastic Gradient Descent</div>
             </div>
           </div>
-        </div> 
+        </div>  */}
+
+
         <div className="hyperparameter-wrapper">
           <div className="parameter-name">Data Size</div>
           <div className="button-container">
@@ -47,6 +55,9 @@ function HyperparameterCard({
             </div>
           </div>
         </div> 
+
+
+
         <div className="hyperparameter-wrapper">
           <div className="parameter-name">Epoch</div>
           <div className="button-container">
@@ -58,6 +69,11 @@ function HyperparameterCard({
           </div>
         </div> 
       </div>
+
+
+
+
+
       <div className="wrapper2">
         <div className="card-container center model-input-card">
           <div className="card-wrapper">

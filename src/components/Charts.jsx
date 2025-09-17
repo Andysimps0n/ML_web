@@ -3,9 +3,7 @@ import { ScatterChart, Scatter,LineChart, Line, XAxis, YAxis, CartesianGrid, Too
 
 function Charts({ historyData, isLoaded, trainData, testingData }) {
 
-  useEffect(()=>{
-    console.log("Train Data Updated")
-  },[trainData])
+  
 
   return (
     <div className={`plot-wrapper ${isLoaded ? "" : "hide-block"}`}>
@@ -15,7 +13,7 @@ function Charts({ historyData, isLoaded, trainData, testingData }) {
             <CartesianGrid />
             <XAxis dataKey="epochs" />
             <YAxis dataKey="loss" />
-            <Tooltip />
+            <Tooltip  formatter={(value, name) => [value.toFixed(3), name]} />
             <Legend />
             <Line type="monotone" dataKey="loss" stroke="#0d00ffff" dot={false} />
           </LineChart>

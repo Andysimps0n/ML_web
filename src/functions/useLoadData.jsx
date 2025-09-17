@@ -8,7 +8,7 @@ function useLoadData(dataSize) {
 
     
 
-      Papa.parse(`/data${500}.csv`, {
+      Papa.parse(`/data${dataSize}.csv`, {
         download: true,
         header: true,
         complete: function(results) {
@@ -16,8 +16,10 @@ function useLoadData(dataSize) {
         }
       })
 
+      console.log(`Loading data of size ${dataSize}`)
 
-  },[])
+
+  },[dataSize])
 
   return data;
 }

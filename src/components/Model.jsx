@@ -4,8 +4,15 @@ import Charts from './Charts';
 import HyperparameterCard from './HyperparameterCard';
 
 function Model() {
+
+  const lossMap = {
+    mse: 'meanSquaredError',
+    mae: tf.metrics.meanAbsoluteError,
+  };
+
   const [dataSize, setDataSize] = useState(200);
   const [epoch, setEpoch] = useState(50);
+  const [lossFunction, setLossFunction] = useState(lossMap.mse);
 
   const { 
     historyData, 
@@ -14,7 +21,7 @@ function Model() {
     setInputPredict, 
     testingData, 
     updateLine
-  } = UseLinearModel(dataSize, epoch);
+  } = UseLinearModel(dataSize, epoch, lossFunction);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -25,8 +32,14 @@ function Model() {
   }, [historyData]);
 
   useEffect(()=>{
-    console.log(`trainData updated:`, trainData )
-  },[trainData])
+    console.log(`lossFunction set to ${lossFunction}`);
+  }, [lossFunction])
+
+
+  useEffect(()=>{
+    console.log(`lossFunction set to ${lossFunction}`);
+  }, [lossFunction])
+
   return (
     <>
       <div className={`loading ${isLoaded ? "hide-block" : ""}`}>
@@ -41,7 +54,9 @@ function Model() {
       />
 
       <HyperparameterCard 
+        lossMap={lossMap}
         setEpoch={setEpoch}
+        setLossFunction={setLossFunction}
         setDataSize={setDataSize}
         isLoaded={isLoaded}
         updateLine={updateLine}
