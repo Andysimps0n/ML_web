@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.layer {
+  width: 100px;
+  height: 100px;
+  background: skyblue;
+  position: absolute;
+  cursor: grab;
+}

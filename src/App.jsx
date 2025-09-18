@@ -3,7 +3,7 @@ import './App.css'
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'  
 import Nav from './components/Nav'
 import Model from './components/Model'
-
+import NeuralNetwork from './components/drag/NeuralNetwork'
 
 function App() {
 
@@ -13,7 +13,7 @@ return (
     <Nav></Nav>
     <Routes>
       <Route path='/' element={<Model></Model>}></Route>
-      {/* <Route path='/human-learning' element={<div></div>}></Route> */}
+      <Route path='/neuralnetwork' element={<NeuralNetwork></NeuralNetwork>}></Route>
     </Routes>
 
   </Router>
