@@ -1,43 +1,23 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import return_model from '../return_model'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'  
+import Nav from './components/Nav'
+import Model from './components/Model'
+import NeuralNetwork from './components/drag/NeuralNetwork'
 
 function App() {
 
-  const [model, setModel] = useState(null);
-  useEffect(()=>{
-    const saveModel = async ()=>{
-      const loadedModel = await return_model()
-      setModel(loadedModel)
-    }
-    saveModel()
-  },[])
 
-  // useEffect(()=>{
-  //   console.log(model)
-  // },[model])
+return (
+  <Router>
+    <Nav></Nav>
+    <Routes>
+      <Route path='/' element={<Model></Model>}></Route>
+      <Route path='/neuralnetwork' element={<NeuralNetwork></NeuralNetwork>}></Route>
+    </Routes>
 
-   async function returnPrediction(input){
-      const inputTensor = tf.tensor2d([input], [1,1])
-      const prediction = model.predict(inputTensor)
-      const value = (await prediction.data())[0]
-      
-      return value
-  }
+  </Router>
 
-    useEffect(() => {
-      const runPrediction = async () => {
-        if (model) {
-          const result = await returnPrediction(-1)
-          console.log(result)
-        }
-      }
-      runPrediction()
-    }, [model])  
-
-  return (
-    <>
-    </>
   )
 }
 
