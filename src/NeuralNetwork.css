@@ -1,12 +1,7 @@
+html,
 body {
+  scrollbar-width: none;
   margin: 0;
-  overflow: hidden;
+  font-family: sans-serif;
 }
 
-.layer {
-  width: 100px;
-  height: 100px;
-  background: skyblue;
-  position: absolute;
-  cursor: grab;
-}

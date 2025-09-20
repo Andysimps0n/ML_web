@@ -1,43 +1,58 @@
-import { useCallback } from 'react';
-import ReactFlow, {
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-} from 'reactflow';
+import { useState, useCallback } from 'react';
+import { ReactFlow, Background, Controls, applyEdgeChanges, applyNodeChanges, Position } from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
 
-import 'reactflow/dist/style.css';
+function Flow() {
 
-const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-];
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    [],
+  )
 
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot))
+  )
 
-function Node() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
+  const initialNodes = [
+    {
+      id : 'n1',
+      position : { x : 0, y : 0 },
+      data: { label: 'Node 1' },
+      type : 'input',
+    },
+    {
+      id : 'n2',
+      position : { x : 100, y : 100 },
+      data: { label: 'Node 2' },
+      type : 'input',
+    },
+  ]
+  
+  
+  const initialEdges = [
+    {
+      id : "n1-n2",
+      source : 'n1',
+      target : 'n2'
+    }
+  ]
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
+  
   return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-    >
-      <MiniMap />
-      <Controls />
-      <Background />
-    </ReactFlow>
+    <div style={{ height: '100vh', width: '100vw'}}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          fitView
+        >
+          <Background/>
+          <Controls/>
+        </ReactFlow>
+    </div>
   );
 }
 
-
-
-export default Node;
+export default Flow;
