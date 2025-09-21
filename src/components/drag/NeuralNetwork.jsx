@@ -5,7 +5,8 @@ import '../../NeuralNetwork.css'
 function NeuralNetwork() {
   return (
     <>
-      <Node></Node>
+      <Node>
+      </Node>
     </>
   )
 }
